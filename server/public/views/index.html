@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>QUIZ</title>
+    <link rel="stylesheet" href="./stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="./stylesheets/create.css">
+
+</head>
+<body>
+    <div ng-controller="QuizController" class="container col-sm-12 text-center">
+        <button class="btn btn-lg btn-primary">CREATE QUIZ</button>
+        <button class="btn btn-lg btn-success">TAKE QUIZ</button>
+        <!--MULTIPLE QUESTION FORM-->
+
+        <form name="multipleChoice" ng-hide="multipleBtn" class="form-horizontal text-uppercase">
+            <fieldset>
+                <legend>Multiple Choice</legend>
+                    <div class="form-group">
+                        <label for="questionArea" class="col-sm-2 control-label">Question</label>
+                        <div class="col-sm-10">
+                            <textarea id="questionArea" ng-model="question.question" class="form-control" rows="3" ng-required="true"></textarea>
+                        </div>
+                    </div>
+                <div class="form-group">
+                    <label for="answerA" class="col-sm-2 control-label">A</label>
+                    <div class="col-sm-4">
+                        <input id="answerA" ng-model="question.answerA" type="text" class="form-control" ng-required="true">
+                    </div>
+                    <label for="answerC" class="col-sm-2  control-label">C</label>
+                    <div class="col-sm-4">
+                        <input id="answerC" ng-model="question.answerC" type="text" class="form-control" ng-required="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="answerB" class="col-sm-2 control-label">B</label>
+                    <div class="col-sm-4">
+                        <input id="answerB" ng-model="question.answerB" type="text" class="form-control" ng-required="true">
+                    </div>
+                    <label for="answerD" class="col-sm-2 control-label">D</label>
+                    <div class="col-sm-4">
+                        <input id="answerD" ng-model="question.answerD" type="text" class="form-control" ng-required="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="correct" class="col-sm-2 control-label">Answer</label>
+                    <div class="col-sm-3">
+                        <select id="correct" ng-model="question.correct" class="form-control" name="correct" ng-required="true">
+                            <option value="">SELECT ANSWER</option>
+                            <option value="0">A</option>
+                            <option value="1">B</option>
+                            <option value="2">C</option>
+                            <option value="3">D</option>
+                        </select>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="form-horizontal">
+                <div class="form-group">
+                <div class="col-sm-offset-6 col-sm-3">
+            <button ng-click="multipleBtn = !multipleBtn; cancelButton()" class="btn btn-lg btn-block btn-danger">Cancel</button>
+                </div>
+                    <div class="col-sm-3">
+                        <button ng-hide="submitBtn" ng-click="multipleBtn = !multipleBtn; submitQuestion(question)" ng-disabled="multipleChoice.$invalid" class="btn btn-lg btn-block btn-success">Submit</button>
+                    </div>
+                    <div class="col-sm-3">
+                        <button ng-hide="updateBtn" ng-click="multipleBtn = !multipleBtn; updateQuestion(question)" ng-disabled="multipleChoice.$touched" class="btn btn-lg btn-block btn-warning">Update</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <!--TRUE OR FALSE QUESTION-->
+        <form name="trueFalse" class="form-horizontal">
+            <div ng-hide="trueFalseBtn">
+                <fieldset>
+                    <legend>TRUE or FALSE</legend>
+                    <div class="form-group">
+                        <label for="questionArea2" class="col-sm-2 control-label">Question</label>
+                        <div class="col-sm-10">
+                            <textarea id="questionArea2" ng-model="question.question" class="form-control" rows="3" ng-required="true"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button ng-click="question.correct='0'" class="btn btn-lg btn-block btn-warning">TRUE</button>
+                        </div>
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button ng-click="question.correct='1'" class="btn btn-lg btn-block btn-warning">FALSE</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="correct2" class="col-sm-2 control-label">Answer</label>
+                        <div class="col-sm-3">
+                            <select id="correct2" ng-model="question.correct" class="form-control" name="correct2" ng-required="true">
+                                <option value="">SELECT ANSWER</option>
+                                <option value="0">TRUE</option>
+                                <option value="1">FALSE</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-offset-6 col-sm-3">
+                            <button ng-click="trueFalseBtn = !trueFalseBtn; cancelButton()" class="btn btn-lg btn-block btn-danger">Cancel</button>
+                        </div>
+                        <div class="col-sm-3">
+                            <button ng-hide="submitBtn" ng-click="trueFalseBtn = !trueFalseBtn; submitQuestion(question)" ng-disabled="trueFalse.$invalid" class="btn btn-lg btn-block btn-success">Submit</button>
+                        </div>
+                        <div class="col-sm-3">
+                            <button ng-hide="updateBtn" ng-click="trueFalseBtn = !trueFalseBtn; updateQuestion(question)" class="btn btn-lg btn-block btn-warning">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <!--TABLE LIST OF QUESTIONS-->
+
+        <table ng-show="quiz.length > 0" class="table table-responsive table-hover">
+            <thead>
+            <tr class="active">
+                <th class="text-center">#</th>
+                <th class="text-center">QUESTION TYPE</th>
+                <th class="text-center">QUESTION</th>
+                <th class="text-center">ANSWER</th>
+                <th class="text-center">EDITS</th>
+            </tr>
+            </thead>
+            <tr ng-repeat="que in quiz">
+                <td>{{$index+1}}</td>
+                <td>{{que.quiz.questionType}}</td>
+                <td class="question-column">{{que.quiz.question}}</td>
+                <td>{{columnAnswer(que.quiz.correct, que.quiz.questionType)}}</td>
+                <td><span style="padding:0" ng-click="editQuestion(que)" class="btn text-muted glyphicon glyphicon-edit pull-left"></span>
+                    <span style="padding:0" ng-click="deleteQuestion(que)" class="btn text-danger glyphicon glyphicon-remove pull-right"></span>
+                </td>
+            </tr>
+        </table>
+
+        <!--ADD QUESTION BUTTON-->
+        <!--SUBMIT QUIZ-->
+            <div class="row">
+                <div class="col-sm-6 btn-tran" ng-hide="questionBtn">
+                    <button ng-click="multipleBtn = !multipleBtn; questionBtn = !questionBtn; multiBtnType()" class="btn btn-lg btn-info">Multiple Choice</button>
+                    <button ng-click="trueFalseBtn = !trueFalseBtn; questionBtn = !questionBtn; booleanBtnType()" class="btn btn-lg btn-info">True or False</button>
+                </div>
+                <div class="col-sm-6">
+                    <button ng-click="questionBtn = !questionBtn" class="btn btn-lg btn-default">Add Question</button>
+                    <button class="btn btn-lg btn-success">SUBMIT QUIZ</button>
+                </div>
+            </div>
+    </div>
+
+    <!--SCRIPTS-->
+    <script src="/scripts/angular.min.js"></script>
+    <script src="/scripts/app.js"></script>
+</body>
+</html>

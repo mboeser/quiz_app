@@ -1,0 +1,12 @@
+table {
+    white-space: nowrap;
+}
+
+.question-column {
+    max-width: 400px;
+    overflow: hidden;
+}
+
+.btn-tran {
+    transition: all 2s;
+}
