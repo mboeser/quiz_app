@@ -1,11 +1,26 @@
-var myApp = angular.module('myApp', []);
+//var myApp = angular.module('myApp', []);
 
-myApp.controller("QuizController",['$scope', '$http', function($scope, $http){
+//SET UP A ROUTER, PULL FROM PREVIOUS CLASS EXAMPLES
+//THIS MAY MEAN THAT YOU NEED MULTIPLE CONTROLLERS
+//EACH CONTROLLER WILL NEED TO SAVE THINGS TO 'A FACTORY'
+//BUT TO SET THINGS UP, YOU CAN USE A SINGLE CONTROLLER
+//JUST KNOW EACH TIME YOU LOAD A VIEW, THE CONTROLLER RESETS, SO INFORMATION DOES NOT CARRY FROM VIEW TO VIEW
+//WHICH IS WHY WE USE A FACTORY
 
-    $scope.multipleBtn = true;
-    $scope.trueFalseBtn = true;
-    $scope.questionBtn = true;
-    $scope.updateBtn = true;
+//1. SET UP ROUTING
+//2. JUST GET CONSOLE LOGS TO FIRE EACH TIME A VIEW IS LOADED
+//3. START WITH A BASIC FACTORY THAT GETS LOADED INTO THE CONTROLLER
+
+
+myApp.controller("QuizController",['$scope', '$http', '$location', 'EditButton', function($scope, $http, $location, EditButton) {
+
+    //console.log('loaded app controller');
+
+    //$scope.multipleBtn = true;
+    //$scope.trueFalseBtn = true;
+    //$scope.questionBtn = true;
+    //$scope.updateBtn = false;
+    //$scope.submitBtn = true;
 
     $scope.question = {};
     $scope.answer = [];
@@ -13,57 +28,74 @@ myApp.controller("QuizController",['$scope', '$http', function($scope, $http){
 
     //$scope.id ='';
 
-    $scope.multiBtnType = function(){
-        $scope.question = {questionType: "Multiple Choice"};
-    };
-
-    $scope.booleanBtnType = function(){
-        $scope.question = {questionType: "True or False"};
-    };
+    //$scope.multiBtnType = function(){
+    //    console.log('multi pass');
+    //    $scope.question = {questionType: "Multiple Choice"};
+    //};
+    //
+    //$scope.booleanBtnType = function(){
+    //    console.log('bool pass');
+    //    $scope.question = {questionType: "True or False"};
+    //};
 
     //Cancel Button
-    $scope.cancelButton = function() {
+    $scope.cancelButton = function () {
         $scope.question = {};
-        $scope.submitBtn = false;
-        $scope.updateBtn = true;
+        //$scope.submitBtn = false;
+        //$scope.updateBtn = true;
     };
 
     //Edit
 
-    $scope.editQuestion = function(foo) {
-        console.log('this is the edit console',foo);
-        $scope.updateBtn = false;
-        $scope.submitBtn = true;
+    $scope.preEditQuestion = function (foo) {
 
-        //$scope.id = foo._id;
+        EditButton.setData(foo);
 
 
-        if (foo.quiz.questionType === "Multiple Choice") {
+        return (foo.quiz.questionType === "Multiple Choice") ? $location.path('/multipleChoice') : $location.path('/trueFalse');
+    };
 
-            $scope.multipleBtn = false; // SHOW Multiple Choice form
-
-            $scope.question = {
-                question: foo.quiz.question,
-                answerA: foo.quiz.quizAnswer[0].text,
-                answerB: foo.quiz.quizAnswer[1].text,
-                answerC: foo.quiz.quizAnswer[2].text,
-                answerD: foo.quiz.quizAnswer[3].text,
-                correct: foo.quiz.correct,
-                id: foo._id,
-                questionType: "Multiple Choice"
-            };
-
-        } else if (foo.quiz.questionType === "True or False") {
+    $scope.editQuestion = function () {
 
 
-            $scope.trueFalseBtn = false; //SHOW True or False form
-            $scope.question = {
-                question: foo.quiz.question,
-                correct: foo.quiz.correct,
-                id: foo._id,
-                questionType: "True or False"
+        var foo = EditButton.getData();
 
-            };
+        console.log(foo.hasOwnProperty('quiz'));
+
+        if (foo.hasOwnProperty('quiz') === false) {
+            $scope.updateBtn = true;
+            $scope.submitBtn = false;
+        } else {
+            $scope.updateBtn = false;
+            $scope.submitBtn = true;
+
+            if (foo.quiz.questionType === "Multiple Choice") {
+
+                $scope.question = {
+                    question: foo.quiz.question,
+                    answerA: foo.quiz.quizAnswer[0].text,
+                    answerB: foo.quiz.quizAnswer[1].text,
+                    answerC: foo.quiz.quizAnswer[2].text,
+                    answerD: foo.quiz.quizAnswer[3].text,
+                    correct: foo.quiz.correct,
+                    id: foo._id,
+                    questionType: "Multiple Choice"
+                };
+
+            } else {
+
+                //$location.path('/trueFalse');
+
+                //$scope.trueFalseBtn = false; //SHOW True or False form
+                $scope.question = {
+                    question: foo.quiz.question,
+                    correct: foo.quiz.correct,
+                    id: foo._id,
+                    questionType: "True or False"
+
+                };
+
+            }
         }
     };
 
@@ -86,13 +118,14 @@ myApp.controller("QuizController",['$scope', '$http', function($scope, $http){
             ]
         }
 
-        $scope.updateBtn = true; // hides Update Btn after clicking the update btn.
-        $scope.submitBtn = false;
+        //$scope.updateBtn = false; // hides Update Btn after clicking the update btn.
+        //$scope.submitBtn = true;
 
 
         console.log($scope.id);
       $http.put('/admin', kittyFooFoo).then(function(response){
           $scope.getQuestions();
+          $location.path('/dashboard');
       });
     };
 
@@ -147,7 +180,7 @@ myApp.controller("QuizController",['$scope', '$http', function($scope, $http){
     };
 
     $scope.columnAnswer = function(ans, type){
-    console.log(ans);
+    //console.log(ans);
 
     if (type === 'Multiple Choice'){
         switch (ans){
@@ -177,4 +210,87 @@ myApp.controller("QuizController",['$scope', '$http', function($scope, $http){
     };
 
     $scope.getQuestions();
+
+
 }]);
+myApp.controller('ModalCtrl',['$scope', '$uibModal', '$log',  function ($scope, $uibModal, $log) {
+
+    //console.log('add clicked logged');
+
+    $scope.items = ['item1', 'item2', 'item3'];
+
+    $scope.animationsEnabled = true;
+
+    $scope.open = function (size) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            size: size,
+            resolve: {
+                items: function () {
+                    return $scope.items;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    $scope.toggleAnimation = function () {
+        $scope.animationsEnabled = !$scope.animationsEnabled;
+    };
+
+    $scope.open2 = function (size) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent2.html',
+            controller: 'ModalInstanceCtrl',
+            size: size,
+            resolve: {
+                items: function () {
+                    return $scope.items;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    $scope.toggleAnimation = function () {
+        $scope.animationsEnabled = !$scope.animationsEnabled;
+    };
+
+    $scope.open2();
+
+}]);
+
+// Please note that $modalInstance represents a modal window (instance) dependency.
+// It is not the same as the $uibModal service used above.
+
+myApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
+
+    $scope.items = items;
+    $scope.selected = {
+        item: $scope.items[0]
+    };
+
+    $scope.ok = function () {
+        $uibModalInstance.close();
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
+

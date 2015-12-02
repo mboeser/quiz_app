@@ -71,8 +71,8 @@ body {
 #myQuiz .progress div {
     position: relative;
     display: inline-block;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     margin-right: 30px;
     border-radius: 50%;
     background-color: rgba(255,255,255,.2);
@@ -84,7 +84,7 @@ body {
     display: block;
     position: absolute;
     top: -60px;
-    left: -13px;
+    left: -17px;
     width: 65px;
     height: 40px;
     background: url(../images/star3.svg) no-repeat 0px 0px;

@@ -1,0 +1,56 @@
+<form name="multipleChoice" ng-init="question.questionType = 'Multiple Choice'; editQuestion()" class="form-horizontal text-uppercase">
+    <fieldset>
+        <legend>Multiple Choice</legend>
+        <div class="form-group">
+            <label for="questionArea" class="col-sm-2 control-label">Question</label>
+            <div class="col-sm-10">
+                <textarea id="questionArea" ng-model="question.question" class="form-control" rows="3" ng-required="true"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="answerA" class="col-sm-2 control-label">A</label>
+            <div class="col-sm-4">
+                <input id="answerA" ng-model="question.answerA" type="text" class="form-control" ng-required="true">
+            </div>
+            <label for="answerC" class="col-sm-2  control-label">C</label>
+            <div class="col-sm-4">
+                <input id="answerC" ng-model="question.answerC" type="text" class="form-control" ng-required="true">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="answerB" class="col-sm-2 control-label">B</label>
+            <div class="col-sm-4">
+                <input id="answerB" ng-model="question.answerB" type="text" class="form-control" ng-required="true">
+            </div>
+            <label for="answerD" class="col-sm-2 control-label">D</label>
+            <div class="col-sm-4">
+                <input id="answerD" ng-model="question.answerD" type="text" class="form-control" ng-required="true">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="correct" class="col-sm-2 control-label">Answer</label>
+            <div class="col-sm-3">
+                <select id="correct" ng-model="question.correct" class="form-control" name="correct" ng-required="true">
+                    <option value="">SELECT ANSWER</option>
+                    <option value="0">A</option>
+                    <option value="1">B</option>
+                    <option value="2">C</option>
+                    <option value="3">D</option>
+                </select>
+            </div>
+        </div>
+    </fieldset>
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-offset-6 col-sm-3">
+                <a ng-click="cancelButton()" href="#dashboard" role="button" class="btn btn-lg btn-block btn-danger">Cancel</a>
+            </div>
+            <div class="col-sm-3">
+                <a ng-hide="submitBtn" ng-click="submitQuestion(question)" role="button" href="#dashboard" ng-disabled="multipleChoice.$invalid" class="btn btn-lg btn-block btn-success">Submit</a>
+            </div>
+            <div class="col-sm-3">
+                <button ng-hide="updateBtn" ng-click="multipleBtn = !multipleBtn; updateQuestion(question)" ng-disabled="multipleChoice.$touched" class="btn btn-lg btn-block btn-warning">Update</button>
+            </div>
+        </div>
+    </div>
+</form>

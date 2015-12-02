@@ -7,6 +7,10 @@ table {
     overflow: hidden;
 }
 
-.btn-tran {
-    transition: all 2s;
+.table-icon {
+    padding: 0;
 }
+
+/*.btn-tran {*/
+    /*transition: all 2s;*/
+/*}*/
