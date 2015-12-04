@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QuizAdmin</title>
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+
+    <!--<link rel="stylesheet" href="/stylesheets/bootstrap.min.css">-->
+    <link rel="stylesheet" href="../stylesheets/loginStyle.css">
+    <!--<link rel="stylesheet" href="../stylesheets/form-elements.css">-->
+
+
+    <!--<script type="text/javascript" src="/vendors/jquery/dist/jquery.min.js"></script>-->
+    <!--<script type="text/javascript" src="/assets/scripts/app.min.js"></script>-->
+</head>
+
+<body>
+
+<div class="top-content">
+
+    <div class="inner-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 text">
+                    <h1><strong>Welcome</strong> to <strong><span class="q">Q</span></strong>uiz<strong><span class="a">A</span></strong>dmin</h1>
+                    <div class="description">
+                        <p>
+                            An open-source teaching app that enables teachers to build quizzes quick & easy.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 form-box">
+                    <div class="form-top">
+                        <div class="form-top-left">
+                            <h3>Login to our site</h3>
+                            <p>Enter your username and password:</p>
+                        </div>
+                        <div class="form-top-right">
+                            <i class="fa fa-lock"></i>
+                        </div>
+                    </div>
+                    <div class="form-bottom">
+                        <form role="form" action="/" method="post" class="login-form">
+                            <div class="form-group">
+                                <label class="sr-only" for="form-username">Username</label>
+                                <input type="text" name="username" placeholder="Username..." class="form-username form-control" id="form-username" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="form-password">Password</label>
+                                <input type="password" name="password" placeholder="Password..." class="form-password form-control" id="form-password" required>
+                            </div>
+                            <button type="submit" class="btn btn-success">Sign in!</button>
+
+                            <hr>
+
+                            <div>
+                                <p class="lead text-center">Register for a New Account</p>
+                            </div>
+                            <a href="views/auth/register.html" role="button" class="btn btn-info btn-block">Register!</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 social-login">
+                    <h3>...or login with:</h3>
+                    <div class="social-login-buttons">
+                        <a class="btn btn-link-2" href="#">
+                            <i class="fa fa-facebook"></i> Facebook
+                        </a>
+                        <a class="btn btn-link-2" href="#">
+                            <i class="fa fa-twitter"></i> Twitter
+                        </a>
+                        <a class="btn btn-link-2" href="#">
+                            <i class="fa fa-google-plus"></i> Google Plus
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>

@@ -1,4 +1,5 @@
-<form name="multipleChoice" ng-init="question.questionType = 'Multiple Choice'; editQuestion()" class="form-horizontal text-uppercase">
+<div class="container-fluid">
+<form name="multipleChoice" ng-init="question.questionType = 'Multiple Choice'; editQuestion()" class="form-horizontal form-color text-uppercase">
     <fieldset>
         <legend>Multiple Choice</legend>
         <div class="form-group">
@@ -43,10 +44,10 @@
     <div class="form-horizontal">
         <div class="form-group">
             <div class="col-sm-offset-6 col-sm-3">
-                <a ng-click="cancelButton()" href="#dashboard" role="button" class="btn btn-lg btn-block btn-danger">Cancel</a>
+                <a ng-click="cancelButton(); ok()" href="#dashboard" role="button" class="btn btn-lg btn-block btn-danger">Cancel</a>
             </div>
             <div class="col-sm-3">
-                <a ng-hide="submitBtn" ng-click="submitQuestion(question)" role="button" href="#dashboard" ng-disabled="multipleChoice.$invalid" class="btn btn-lg btn-block btn-success">Submit</a>
+                <a ng-hide="submitBtn" ng-click="submitQuestion(question); ok()" role="button" href="#dashboard" ng-disabled="multipleChoice.$invalid" class="btn btn-lg btn-block btn-success">Submit</a>
             </div>
             <div class="col-sm-3">
                 <button ng-hide="updateBtn" ng-click="multipleBtn = !multipleBtn; updateQuestion(question)" ng-disabled="multipleChoice.$touched" class="btn btn-lg btn-block btn-warning">Update</button>
@@ -54,3 +55,4 @@
         </div>
     </div>
 </form>
+</div>

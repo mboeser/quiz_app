@@ -1,4 +1,4 @@
-<form name="trueFalse" ng-init="question.questionType = 'True of False'; editQuestion()" class="form-horizontal">
+<form name="trueFalse" ng-init="question.questionType = 'True of False'; editQuestion()" class="form-horizontal form-color">
 
         <fieldset>
             <legend>TRUE or FALSE</legend>
@@ -33,12 +33,11 @@
                     <a ng-click="cancelButton()" class="btn btn-lg btn-block btn-danger" href="#dashboard" role="button">Cancel</a>
                 </div>
                 <div class="col-sm-3">
-                    <button ng-hide="submitBtn" ng-click="submitQuestion(question)" ng-disabled="trueFalse.$invalid" class="btn btn-lg btn-block btn-success">Submit</button>
+                    <a ng-hide="submitBtn" ng-click="submitQuestion(question)" href="#dashboard"  ng-disabled="trueFalse.$invalid" class="btn btn-lg btn-block btn-success">Submit</a>
                 </div>
                 <div class="col-sm-3">
                     <button ng-hide="updateBtn" ng-click="updateQuestion(question)" class="btn btn-lg btn-block btn-warning">Update</button>
                 </div>
             </div>
         </div>
-    </div>
 </form>
