@@ -22,6 +22,10 @@ myApp.config(['$routeProvider', function($routeProvider){
         templateUrl: "/views/routes/trueFalse.html",
         controller: "QuizController"
     }).
+    when('/quiz', {
+        templateUrl: "/views/quiz.html",
+        controller: "QuizController"
+    }).
     otherwise({
         redirectTo: 'dashboard'
     })

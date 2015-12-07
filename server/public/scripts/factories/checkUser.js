@@ -2,7 +2,7 @@ myApp.factory('CheckUser', ['$http', function($http){
 
     var data = undefined;
 
-    //console.log('check user fact');
+    console.log('check user fact');
 
     var checkUser = function () {
         var promise = $http.get('/user').then(function (response) {

@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="/stylesheets/create.css">
 
 </head>
-<body class="container col-sm-12 text-center">
+<body class="text-center">
 
     <!--REPLACE THE WHOLE DIV BELOW WITH <main ng-view></main>-->
 
     <!--<div ng-controller="QuizController" class="container col-sm-12 text-center">-->
-
+        <div ng-include="'templates/header.html'"></div>
 
         <main ng-view></main>
 
@@ -40,6 +40,10 @@
 
             <!--</div>-->
     <!--</div>-->
+
+    <!--FOOTER-->
+
+    <div ng-include="'templates/footer.html'"></div>
 
     <!--SCRIPTS-->
 

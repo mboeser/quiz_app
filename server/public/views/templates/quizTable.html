@@ -1,68 +1,65 @@
-<nav class="navbar navbar-default top-head">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <h2><strong><span class="q">Q</span></strong>uiz<strong><span class="a">A</span></strong>dmin <span>Welcome</span> <span class="text-uppercase">{{user.username}}</span>
-            </h2>
-            <!--<a class="navbar-brand" href="#">-->
-                <!--<img alt="Brand" src="...">-->
-            <!--</a>-->
-        </div>
-    </div>
-</nav>
-
-<table  class="table table-responsive table-hover">
-    <thead>
-    <tr class="active">
-        <th class="text-center">#</th>
-        <th class="text-center">QUESTION TYPE</th>
-        <th class="text-center">QUESTION</th>
-        <th class="text-center">ANSWER</th>
-        <th class="text-center">EDITS</th>
-    </tr>
-    </thead>
-    <tr ng-repeat="que in quiz">
-        <td>{{$index+1}}</td>
-        <td>{{que.quiz.questionType}}</td>
-        <td class="question-column">{{que.quiz.question}}</td>
-        <td>{{columnAnswer(que.quiz.correct, que.quiz.questionType)}}</td>
-        <td><span ng-click="preEditQuestion(que)" class="table-icon btn text-muted glyphicon glyphicon-edit pull-left"></span>
-            <span ng-click="deleteQuestion(que)" class="table-icon btn text-danger glyphicon glyphicon-remove pull-right"></span>
-        </td>
-    </tr>
-</table>
-
-<div ng-controller="ModalCtrl">
-
-    <div class="row">
-        <div class="col-sm-6">
-            <button ng-click="open2()" class="btn btn-lg btn-default">Add Question</button>
-        </div>
-
-        <div class="col-sm-6">
-            <button class="btn btn-lg btn-success">SUBMIT QUIZ</button>
-        </div>
-    </div>
+<div class="container-fluid">
+    <div class="col-sm-12">
 
 
-    <!--<script type="text/ng-template" id="myModalContent.html">-->
+        <table class="table table-responsive table-hover">
+            <thead>
+            <tr class="active">
+                <th class="text-center">#</th>
+                <th class="text-center">QUESTION TYPE</th>
+                <th class="text-center">QUESTION</th>
+                <th class="text-center">ANSWER</th>
+                <th class="text-center">EDITS</th>
+            </tr>
+            </thead>
+            <tr ng-repeat="que in quiz">
+                <td>{{$index+1}}</td>
+                <td>{{que.quiz.questionType}}</td>
+                <td class="question-column">{{que.quiz.question}}</td>
+                <td>{{columnAnswer(que.quiz.correct, que.quiz.questionType)}}</td>
+                <td><span ng-click="preEditQuestion(que)"
+                          class="table-icon btn text-muted glyphicon glyphicon-edit pull-left"></span>
+                    <span ng-click="deleteQuestion(que)"
+                          class="table-icon btn text-danger glyphicon glyphicon-remove pull-right"></span>
+                </td>
+            </tr>
+        </table>
 
-        <!--<div class="modal-body">-->
+        <div ng-controller="ModalCtrl">
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <button ng-click="open2()" class="btn btn-lg btn-default">Add Question</button>
+                </div>
+
+                <div class="col-sm-6">
+                    <!--<button class="btn btn-lg btn-success">SUBMIT QUIZ</button>-->
+                    <a href="./quiz.html" class="btn btn-lg btn-success">TAKE QUIZ</a>
+
+                </div>
+            </div>
+
+
+            <!--<script type="text/ng-template" id="myModalContent.html">-->
+
+            <!--<div class="modal-body">-->
             <!--<a ng-click="ok()" class="btn btn-lg btn-info" role="button" href="#multipleChoice">Multiple Choice</a>-->
             <!--<a ng-click="ok()" class="btn btn-lg btn-info" role="button" href="#trueFalse">True or False</a>-->
-        <!--</div>-->
+            <!--</div>-->
 
-    <!--</script>-->
+            <!--</script>-->
 
-    <script type="text/ng-template" id="myModalContent2.html">
+            <script type="text/ng-template" id="myModalContent2.html">
 
-        <div class="modal-body">
-            <a href="#selectQuestionType" class="btn btn-lg btn-primary">CREATE QUIZ</a>
-            <a href="./quiz.html"  class="btn btn-lg btn-success">TAKE QUIZ</a>
+                <div class="modal-body">
+                    <a href="#selectQuestionType" class="btn btn-lg btn-primary">CREATE QUIZ</a>
+                    <a href="./quiz.html" class="btn btn-lg btn-success">TAKE QUIZ</a>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-info btn-lg btn-block"> LOGIN or SIGNUP</button>
+                </div>
+
+            </script>
         </div>
-        <div class="modal-footer">
-        <button class="btn btn-info btn-lg btn-block"> LOGIN or SIGNUP</button>
-        </div>
-
-    </script>
-
+    </div>
 </div>

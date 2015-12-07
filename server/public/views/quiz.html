@@ -47,17 +47,17 @@
         <h3>Results</h3>
         <p>You scored {{percentage}}% by correctly answering {{score}} of the total {{totalQuestions}} questions.</p>
 
-        <a href="/quiz.html" class="btn">ReTake Quiz</a>
+        <a href="/views/quiz.html" class="btn">ReTake Quiz</a>
 
 
-        <!--
+
                         <p>Use the links below to challenge your friends</p>
 
-                        <div class="share">
-                            <a class="btn email" href="#">Email</a>
-                            <a class="btn twitter" href="#">Tweet</a>
+                        <div class="share" ng-bind-html="createShareLinks(percentage)">
+                            <!--<a class="btn email" href="#">Email</a>-->
+                            <!--<a class="btn twitter" href="#">Tweet</a>-->
                         </div>
-        -->
+
     </div>
 </div>
 

@@ -1,14 +1,14 @@
-myApp.controller("QuizController",['$scope', '$http', '$location', 'EditButton', 'CheckUser', function($scope, $http, $location, EditButton, CheckUser) {
-
+myApp.controller("QuizController", ['$scope', '$http', '$location', 'EditButton', 'CheckUser', function ($scope, $http, $location, EditButton, CheckUser) {
 
 
     $scope.user = {};
 
     $scope.dataService = CheckUser;
 
-    if($scope.dataService.userData() === undefined){
-        $scope.dataService.retrieveData().then(function(){
+    if ($scope.dataService.userData() === undefined) {
+        $scope.dataService.retrieveData().then(function () {
             $scope.user = $scope.dataService.userData();
+            console.log($scope.user.local.email);
             console.log($scope.user._id);
         });
     } else {
@@ -19,7 +19,6 @@ myApp.controller("QuizController",['$scope', '$http', '$location', 'EditButton',
     $scope.question = {};
     $scope.answer = [];
     $scope.quiz = [];
-
 
     //Cancel Button
     $scope.cancelButton = function () {
@@ -61,7 +60,7 @@ myApp.controller("QuizController",['$scope', '$http', '$location', 'EditButton',
                     correct: foo.quiz.correct,
                     id: foo._id,
                     questionType: "Multiple Choice",
-                    userId: $scope.user._id
+                    userId: $scope.user._id._id
                 };
             } else {
 
@@ -70,7 +69,7 @@ myApp.controller("QuizController",['$scope', '$http', '$location', 'EditButton',
                     correct: foo.quiz.correct,
                     id: foo._id,
                     questionType: "True or False",
-                    userId: $scope.user._id
+                    userId: $scope.user._id._id
 
 
                 };
@@ -79,8 +78,8 @@ myApp.controller("QuizController",['$scope', '$http', '$location', 'EditButton',
         }
     };
 
-    $scope.updateQuestion = function(kittyFooFoo){
-            console.log('this is update console', kittyFooFoo);
+    $scope.updateQuestion = function (kittyFooFoo) {
+        console.log('this is update console', kittyFooFoo);
         if (kittyFooFoo.questionType === 'Multiple Choice') {
 
 
@@ -99,14 +98,14 @@ myApp.controller("QuizController",['$scope', '$http', '$location', 'EditButton',
         }
 
         console.log($scope.id);
-      $http.put('/admin', kittyFooFoo).then(function(response){
-          $scope.getQuestions();
-          $location.path('/dashboard')
-      });
+        $http.put('/admin', kittyFooFoo).then(function (response) {
+            $scope.getQuestions();
+            $location.path('/dashboard')
+        });
     };
 
     //Delete
-    $scope.deleteQuestion = function(zoom){
+    $scope.deleteQuestion = function (zoom) {
         var result = confirm("Are you sure you want to DELETE the question?");
         if (result) {
             console.log(zoom);
@@ -117,15 +116,15 @@ myApp.controller("QuizController",['$scope', '$http', '$location', 'EditButton',
     };
 
     //GET
-    $scope.getQuestions = function() {
-      $http.get('/admin').then(function(response){
-          $scope.quiz = response.data;
-          console.log(response.data);
-      });
+    $scope.getQuestions = function () {
+        $http.get('/admin').then(function (response) {
+            $scope.quiz = response.data;
+            console.log(response.data);
+        });
     };
 
     //POST
-    $scope.submitQuestion = function(kittyFooFoo){
+    $scope.submitQuestion = function (kittyFooFoo) {
 
         if (kittyFooFoo.questionType === 'Multiple Choice') {
 
@@ -150,26 +149,25 @@ myApp.controller("QuizController",['$scope', '$http', '$location', 'EditButton',
         $scope.answer = [];
 
         //console.log($scope.quiz);
-        $http.post('/admin', kittyFooFoo).then(function(response){
+        $http.post('/admin', kittyFooFoo).then(function (response) {
         });
     };
 
 
+    $scope.columnAnswer = function (ans, type) {
 
-    $scope.columnAnswer = function(ans, type){
-
-    if (type === 'Multiple Choice'){
-        switch (ans){
-            case '0':
-                return 'A';
-            case '1':
-                return 'B';
-            case '2':
-                return 'C';
-            case '3':
-                return 'D'
+        if (type === 'Multiple Choice') {
+            switch (ans) {
+                case '0':
+                    return 'A';
+                case '1':
+                    return 'B';
+                case '2':
+                    return 'C';
+                case '3':
+                    return 'D'
+            }
         }
-    }
         else {
 
             switch (ans) {
@@ -186,11 +184,10 @@ myApp.controller("QuizController",['$scope', '$http', '$location', 'EditButton',
 }]);
 
 
+myApp.controller('ModalCtrl', ['$scope', '$uibModal', '$log', '$http', '$location', function ($scope, $uibModal, $log, $http, $location) {
 
-myApp.controller('ModalCtrl',['$scope', '$uibModal', '$log', '$http', '$location',  function ($scope, $uibModal, $log, $http, $location) {
-
-    $scope.getQuestions = function() {
-        $http.get('/admin').then(function(response){
+    $scope.getQuestions = function () {
+        $http.get('/admin').then(function (response) {
             $scope.quiz = response.data;
         });
     };
@@ -284,7 +281,7 @@ myApp.controller('ModalCtrl',['$scope', '$uibModal', '$log', '$http', '$location
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $uibModal service used above.
 
-myApp.controller('ModalInstanceCtrl',['$scope', '$http', '$uibModalInstance', function ($scope, $http, $uibModalInstance, items) {
+myApp.controller('ModalInstanceCtrl', ['$scope', '$http', '$uibModalInstance', function ($scope, $http, $uibModalInstance, items) {
 
     //$scope.question = {};
     //$scope.answer = [];

@@ -1,3 +1,9 @@
+@import url(http://fonts.googleapis.com/css?family=Titillium+Web:900|Roboto:400,100);
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
 body {
     background: #fff url(../images/2.jpg) no-repeat 0px 0px;
 }
@@ -38,6 +44,25 @@ strong { font-weight: 500; }
 legend, .form-color {
     color: #fff7cd;
 }
+
+.footer {
+    bottom: 0;
+    left: 0;
+    margin-top: 30px;
+    position: absolute;
+    color: #c0c0c0;
+    /*height: 48px;*/
+    background-color: rgba(51,51,51, .8);
+}
+
+.inner-footer{
+    padding-top: 10px;
+}
+
+/*li {*/
+    /*list-style: none;*/
+    /*display: block;*/
+/*}*/
 
 /*.btn-tran {*/
     /*transition: all 2s;*/
